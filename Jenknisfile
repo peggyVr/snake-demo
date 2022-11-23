@@ -21,15 +21,14 @@ agent any
     stage('Build-and-Tag') {
     /* This builds the actual image; synonymous to
          * docker build on the command line */
-      steps{    
-        sh 'echo Build and Tag'
-          }
+        app = docker.build("pegvr/snake")
     }
 
     stage('Post-to-dockerhub') {
-     steps {
-        sh 'echo post to dockerhub repo'
-     }
+    
+     docker.withRegistry('https://registry.hub.docker.com', 'dockerhub') {
+            app.push("new")
+        			}
     }
 
     stage('SECURITY-IMAGE-SCANNER'){
@@ -39,9 +38,9 @@ agent any
     }
 
     stage('Pull-image-server') {
-      steps {
-         sh 'echo pulling image ...'
-       }
+    
+         sh "docker-compose down"
+         sh "docker-compose up -d"	
       }
     
     stage('DAST') {
