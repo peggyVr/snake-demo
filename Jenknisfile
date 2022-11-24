@@ -15,7 +15,7 @@ node ('ubuntu'){
     stage('Build-and-Tag') {
     /* This builds the actual image; synonymous to
          * docker build on the command line */
-        app = docker.build("pegvr/snake")
+        app = docker.build("pegvr/snake:new")
     }
     stage('Post-to-dockerhub') {
     
