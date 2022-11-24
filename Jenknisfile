@@ -19,7 +19,7 @@ node ('ubuntu'){
     }
     stage('Post-to-dockerhub') {
     
-     docker.withRegistry('https://registry.hub.docker.com', 'dockerhub') {
+     withDockerRegistry([credentialsId: "dockerhub", url: ""]) {
             app.push("new")
         			}
          }
