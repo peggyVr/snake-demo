@@ -8,7 +8,7 @@ node ('ubuntu'){
        checkout scm
     }  
     stage('SAST'){
-      build 'Sonar-Qube'   
+     /* build 'Sonar-Qube' */   
      }
 
     
